@@ -2,10 +2,11 @@
 // Verifica se os dados do formulário foram enviados via POST
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Verifica se todos os campos necessários foram preenchidos
-    if (isset($_POST['id'], $_POST['nome'], $_POST['email'], $_POST['status'])) {
+    if (isset($_POST['id'], $_POST['nome'], $_POST['email'], $_POST['status'], $_POST['data_nascimento'])) {
         // Obtém os dados do formulário
         $id = $_POST['id'];
         $nome = $_POST['nome'];
+        $data_nascimento = $_POST['data_nascimento'];
         $email = $_POST['email'];
         $status = $_POST['status'];
 
@@ -18,14 +19,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Query para atualizar os dados do usuário
         if ($senha !== null) {
             // Se uma nova senha foi fornecida, atualiza incluindo a senha
-            $sql = "UPDATE usuarios SET nome = ?, email = ?, senha = ?, status = ? WHERE id = ?";
+            $sql = "UPDATE usuarios SET nome = ?, email = ?, senha = ?, data_nascimento = ?, status = ? WHERE id = ?";
             $stmt = $conn->prepare($sql);
-            $stmt->bind_param("ssssi", $nome, $email, $senha, $status, $id);
+            $stmt->bind_param("ssssii", $nome, $email, $senha, $data_nascimento, $status, $id);
         } else {
             // Se não foi fornecida nova senha, atualiza sem alterar a senha atual
-            $sql = "UPDATE usuarios SET nome = ?, email = ?, status = ? WHERE id = ?";
+            $sql = "UPDATE usuarios SET nome = ?, email = ?, data_nascimento = ?, status = ? WHERE id = ?";
             $stmt = $conn->prepare($sql);
-            $stmt->bind_param("ssii", $nome, $email, $status, $id);
+            $stmt->bind_param("sssii", $nome, $email, $data_nascimento, $status, $id);
         }
 
         // Executa a query

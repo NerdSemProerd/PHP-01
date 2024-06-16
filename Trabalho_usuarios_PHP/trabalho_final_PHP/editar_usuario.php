@@ -18,6 +18,7 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
         // Obtém os dados do usuário
         $row = $resultado->fetch_assoc();
         $nome = $row['nome'];
+        $data_nascimento = $row['data_nascimento']; // Adiciona esta linha para obter a data de nascimento
         $email = $row['email'];
         $status = $row['status'];
     } else {
@@ -70,6 +71,11 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
         <div class="mb-3">
             <label for="nome" class="form-label">Nome:</label>
             <input type="text" class="form-control" id="nome" name="nome" value="<?php echo $nome; ?>" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="data_nascimento" class="form-label">Data de Nascimento:</label>
+            <input type="date" class="form-control" id="data_nascimento" name="data_nascimento" value="<?php echo $data_nascimento; ?>" required>
         </div>
         
         <div class="mb-3">

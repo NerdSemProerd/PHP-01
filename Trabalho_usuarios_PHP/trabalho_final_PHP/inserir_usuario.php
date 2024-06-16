@@ -5,11 +5,13 @@ require_once 'conexao.php';
 // Coletar dados do formulário
 $nome = $_POST['nome'];
 $email = $_POST['email'];
+$data_nascimento = $_POST['data_nascimento'];
 $senha = $_POST['senha']; // Lembre-se de fazer hash da senha antes de armazenar no banco de dados
 $status = $_POST['status'];
 
 // Query para inserir um novo usuário
-$sql = "INSERT INTO usuarios (nome, email, senha, status) VALUES ('$nome', '$email', '$senha', '$status')";
+$sql = "INSERT INTO usuarios (nome, email, senha, data_nascimento, status)
+            VALUES ('$nome', '$email', '$senha', '$data_nascimento', '$status')";
 
 if ($conn->query($sql) === TRUE) {
     echo "Usuário inserido com sucesso!";

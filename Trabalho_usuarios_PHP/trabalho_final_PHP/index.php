@@ -28,6 +28,7 @@
                 <tr>
                     <th scope="col">Nome</th>
                     <th scope="col">Email</th>
+                    <th scope="col">Data de Nascimento</th>
                     <th scope="col">Status</th>
                     <th scope="col" class="actions">Ações</th> <!-- Coluna para os botões -->
                 </tr>
@@ -38,7 +39,7 @@
                 require_once 'conexao.php';
 
                 // Query para selecionar todos os registros da tabela usuarios
-                $sql = "SELECT id, nome, email, status FROM usuarios";
+                $sql = "SELECT id, nome, email, data_nascimento, status FROM usuarios";
                 $resultado = $conn->query($sql);
 
                 // Verificando se há registros retornados pela consulta
@@ -48,11 +49,10 @@
                         echo "<tr>";
                         echo "<td>" . $row["nome"] . "</td>";
                         echo "<td>" . $row["email"] . "</td>";
-                        // Aplicar classe de cor com base no status
-                        echo "<td class='" . ($row["status"] == 1 ? "status-ativo" : "status-inativo") . "'>"; //OPERADOR TERNARIO = Condição ? (se verdadeira) mostra isso : (se não) mostra aquilo
+                        echo "<td>" . date('d/m/Y', strtotime($row["data_nascimento"])) . "</td>"; // Formata a data no formato brasileiro
+                        echo "<td class='" . ($row["status"] == 1 ? "status-ativo" : "status-inativo") . "'>";
                         echo $row["status"] == 1 ? "Ativo" : "Inativo";
                         echo "</td>";
-                        // Coluna de Ações alinhada à direita
                         echo "<td class='actions'>";
                         echo "<a href='editar_usuario.php?id=" . $row["id"] . "' class='btn btn-sm btn-info mr-2'>Editar</a>";
                         echo "<a href='excluir_usuario.php?id=" . $row["id"] . "' class='btn btn-sm btn-danger' onclick='return confirm(\"Tem certeza que deseja excluir este usuário?\");'>Excluir</a>";
@@ -60,7 +60,7 @@
                         echo "</tr>";
                     }
                 } else {
-                    echo "<tr><td colspan='4'>Nenhum resultado encontrado.</td></tr>";
+                    echo "<tr><td colspan='5'>Nenhum resultado encontrado.</td></tr>";
                 }
 
                 // Fechando conexão com o banco de dados
