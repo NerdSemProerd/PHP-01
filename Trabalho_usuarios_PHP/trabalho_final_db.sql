@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 16/06/2024 às 22:02
+-- Tempo de geração: 16/06/2024 às 23:44
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.0.30
 
@@ -30,6 +30,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `usuarios` (
   `id` int(11) NOT NULL,
   `nome` varchar(100) NOT NULL,
+  `data_nascimento` date DEFAULT NULL,
   `email` varchar(100) NOT NULL,
   `senha` varchar(255) NOT NULL,
   `status` tinyint(1) DEFAULT NULL
@@ -39,8 +40,8 @@ CREATE TABLE `usuarios` (
 -- Despejando dados para a tabela `usuarios`
 --
 
-INSERT INTO `usuarios` (`id`, `nome`, `email`, `senha`, `status`) VALUES
-(12, 'Emanuell', 'emanuell@gmail.com', '', 1);
+INSERT INTO `usuarios` (`id`, `nome`, `data_nascimento`, `email`, `senha`, `status`) VALUES
+(16, 'Emanuell Henrique', '2005-05-17', 'emanuell@gmail.com', '123123123', 1);
 
 --
 -- Índices para tabelas despejadas
@@ -60,7 +61,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de tabela `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
